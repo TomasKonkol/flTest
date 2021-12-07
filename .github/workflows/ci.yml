@@ -1,4 +1,4 @@
-name: Continous Integration
+name: Automated Testing
 on:
   push:
     branches: [ main ]
