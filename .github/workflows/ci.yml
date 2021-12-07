@@ -16,6 +16,9 @@ jobs:
         channel: 'stable'
         flutter-version: '2.2.x'
 
+    - run: dart --version
+    - run: flutter --version
+
     - name: Install app dependencies
       run: flutter pub get
 
