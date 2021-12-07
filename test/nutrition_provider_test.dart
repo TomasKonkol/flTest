@@ -94,9 +94,62 @@ void main() {
       expect(plan.meals.elementAt(2).name, 'test meal 3');
     });
 
-    test('Test to check nutritional value', () {
+    test('Test to check nutritional value for single meal item', () {
       meal4.mealItems = [mealItem3];
       expect(meal4.nutritionalValues, NutritionalValues.values(1200, 9, 110, 2, 10, 8, 1, 10));
+    });
+
+    test('Test to check correct calculations in meal with multiple meal items', () {
+      final meal4 = Meal(
+        time: TimeOfDay(hour: 11, minute: 40),
+        id: 4,
+        plan: 1,
+        name: 'test meal 4',
+      );
+
+      final ingredient1 = Ingredient(
+        id: 1,
+        name: 'Water',
+        creationDate: DateTime(2021, 5, 1),
+        energy: 500,
+        carbohydrates: 10,
+        carbohydratesSugar: 2,
+        protein: 5,
+        fat: 20,
+        fatSaturated: 7,
+        fibres: 12,
+        sodium: 0.5,
+      );
+      final ingredient2 = Ingredient(
+        id: 2,
+        name: 'Burger soup',
+        creationDate: DateTime(2021, 5, 10),
+        energy: 25,
+        carbohydrates: 10,
+        carbohydratesSugar: 2,
+        protein: 1,
+        fat: 12,
+        fatSaturated: 9,
+        fibres: 50,
+        sodium: 0,
+      );
+
+      final mealItem1 = MealItem(
+        ingredientId: 1,
+        amount: 150,
+      );
+      mealItem1.ingredientObj = ingredient1;
+
+      final mealItem2 = MealItem(
+        ingredientId: 2,
+        amount: 200,
+      );
+      mealItem2.ingredientObj = ingredient2;
+
+      meal4.mealItems = [mealItem1, mealItem2];
+
+      expect(
+          meal4.nutritionalValues, NutritionalValues.values(800, 9.5, 35, 7, 54, 28.5, 118, 0.75));
     });
   });
 }
