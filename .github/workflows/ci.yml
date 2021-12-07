@@ -1,9 +1,9 @@
 name: Continous Integration
 on:
   push:
-    branches: [ maisn ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 jobs:
   test:
     runs-on: ubuntu-20.04
@@ -21,3 +21,9 @@ jobs:
 
     - name: Test app
       run: flutter test --coverage
+
+    #- name: Upload coverage to Codecov
+    #  uses: codecov/codecov-action@v1
+    #  with:
+    #    token: ${{ secrets.CODECOV_TOKEN }}
+    #    file: coverage/lcov.info
